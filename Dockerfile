@@ -50,7 +50,7 @@ RUN  adduser -s /bin/sh -u 1001 -G root -H -S -D default \
   && chmod -R 755 ${EXEC} \
   && chown -R 1001:0 ${WWW} \
   && chmod -R 755 ${WWW} \
-  && chmod -R 755 ${STI_SCRIPTS_PATH}
+  && chmod -R 775 ${STI_SCRIPTS_PATH}
 
 USER 1001
 
