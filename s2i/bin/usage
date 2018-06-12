@@ -1,0 +1,39 @@
+#!/bin/bash -e
+
+cat <<EOF
+This is the alpine-lighttpd-php S2I image:
+To use it, install S2I: https://github.com/openshift/source-to-image
+
+Build S2I image in Docker:
+  docker build -t alpine-lighttpd-php-s2i .
+
+Export to Docker Hub:
+  docker tag alpine-lighttpd-php-s2i mcn015/alpine-lighttpd-php-s2i:latest
+  docker login -u mcn015 -p ...
+  docker push mcn015/alpine-lighttpd-php-s2i:latest
+
+Import S2I builder image in OpenShift (from Docker Hub):
+  oc import-image mcn015/alpine-lighttpd-php-s2i --confirm
+--------------------------------------------------------------------
+Build in OpenShift:
+oc new-build --name alpine-lighttpd-php-s2i --strategy=docker \
+--code https://github.com/mcn015/alpine-lighttpd-php-s2i
+oc start-build alpine-lighttpd-php-s2i
+
+--------------------------------------------------------------------
+
+Build application image:
+---
+In Docker:
+  s2i build \
+    https://github.com/mcn015/lighttpd-web-site \
+    alpine-lighttpd-php-s2i \
+    lighttpd-site
+
+You can then run the resulting image via:
+docker run --rm -d -p 8080:8080 lighttpd-site
+
+In OpenShift:
+---
+oc new-app alpine-lighttpd-php-s2i~https://github.com/mcn015/lighttpd-web-site
+EOF

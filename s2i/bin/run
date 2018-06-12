@@ -1,0 +1,8 @@
+#!/bin/bash -e
+#
+# S2I run script for the 'alpine-lighttpd-php' image.
+# The run script executes the server that runs your application.
+#
+
+# rc-service lighttpd start && rc-update add lighttpd default
+exec /usr/sbin/lighttpd -D -f /etc/lighttpd/lighttpd.conf php-fpm
