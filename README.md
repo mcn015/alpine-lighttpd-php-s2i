@@ -2,7 +2,7 @@ Simple HTTP server in Alpine using lighttpd (with PHP 7)
 ========================================================
 
 
- ##First check images in Docker. Execute from local dir
+ ## First check images in Docker. Execute from local dir
 
 ```
 docker build -t alpine-lighttpd-php-s2i .
@@ -21,7 +21,7 @@ docker run -ti -p 8080:8080 --rm --name tmp --entrypoint /bin/bash static-web-si
 ```
 if your S2I app executes without errors, then commit your repositories to GitHub and
 
-##Build in OpenShift
+## Build in OpenShift
 
 login as admin
 ```
@@ -46,7 +46,7 @@ oc create -f https://raw.githubusercontent.com/mcn015/alpine-lighttpd-php-s2i/ma
 ```
 oc edit is/alpine-lighttpd-php-s2i -o json
 ```
-and merge the \utags element in \uspec:
+and merge the **tags** element in **spec**:
 ```
 {
   "kind": "ImageStream",
@@ -70,8 +70,8 @@ and merge the \utags element in \uspec:
   }
 }
 ```
- ##Create new application.
- 
+ ## Create new application.
+
  Login as your user in your project.
 
 ```
