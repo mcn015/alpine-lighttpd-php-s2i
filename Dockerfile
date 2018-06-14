@@ -46,9 +46,9 @@ RUN  adduser -s /bin/sh -u 1001 -G root -H -S -D default \
   && mkdir -p ${EXEC} \
   && mkdir -p ${WWW} \
   && chown -R 1001:0 ${EXEC} \
-  && chmod -R 755 ${EXEC} \
+  && chmod -R 775 ${EXEC} \
   && chown -R 1001:0 ${WWW} \
-  && chmod -R 755 ${WWW} \
+  && chmod -R 775 ${WWW} \
   && chown -R 1001:0 /usr/libexec/s2i \
   && chmod -R 775 /usr/libexec/s2i
 
