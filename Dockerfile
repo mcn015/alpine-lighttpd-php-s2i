@@ -33,8 +33,8 @@ RUN apk --update add \
     php7-ldap \
     php7-ctype \
     php7-cgi \
-    bash \
     # openrc \
+    bash \
     php7-dom && \
     rm -rf /var/cache/apk/*
 

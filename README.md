@@ -29,19 +29,21 @@ oc project openshift
 ```
 build template and edit image stream
 ```
-oc new-build --name simple-http-server --strategy=docker --code https://github.com/mcn015/alpine-lighttpd-php-s2i
+oc new-build --name alpine-lighttpd-php-s2i --strategy=docker --code https://github.com/mcn015/alpine-lighttpd-php-s2i
 ```
 
 ```
-oc create -f https://raw.githubusercontent.com/mcn015/simple-http-server/master/imagestream.json
+oc create -f https://raw.githubusercontent.com/mcn015/alpine-lighttpd-php-s2i/master/imagestream.json
 ```
     or
 ```
-oc edit is/simple-http-server -o json
+oc edit is/alpine-lighttpd-php-s2i -o json
 ```
  Create new application.
  Login as your user in your project.
 
 ```
-oc new-app simple-http-server~https://github.com/mcn015/static-web-site
+oc new-app alpine-lighttpd-php-s2i~https://github.com/mcn015/static-web-site
 ```
+
+To trim your image, remember to remove 'bash' or other debug commands
