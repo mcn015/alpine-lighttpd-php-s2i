@@ -32,12 +32,13 @@ oc project openshift
 ```
 oc new-build --name alpine-lighttpd-php-s2i --strategy=docker --code https://github.com/mcn015/alpine-lighttpd-php-s2i
 ```
+
   correct errors and build from the local directory ->
 ```
 oc start-build alpine-lighttpd-php-s2i --from-dir=.
 ```
 
-  to add the S2I image builder to thw web console catalogue:
+  to add the S2I image builder to the web console catalogue:
 ```
 oc create -f https://raw.githubusercontent.com/mcn015/alpine-lighttpd-php-s2i/master/imagestream.json
 ```
@@ -70,10 +71,11 @@ and merge the \utags element in \uspec:
 }
 ```
  ##Create new application.
+ 
  Login as your user in your project.
 
 ```
 oc new-app alpine-lighttpd-php-s2i~https://github.com/mcn015/static-web-site
 ```
 
-To trim your image, remember to remove 'bash' or other debug commands
+To trim your image, remember to remove 'bash' and any other debug commands
