@@ -2,12 +2,13 @@ Simple HTTP server in Alpine using lighttpd (with PHP 7)
 ========================================================
 
 
- First check images in Docker. Execute from local dir
+ ##First check images in Docker. Execute from local dir
 
 ```
 docker build -t alpine-lighttpd-php-s2i .
 docker run -ti -p 8080:8080 --rm --name tmp --entrypoint /bin/bash alpine-lighttpd-php-s2i
 ```
+(we installed bash to help debugging)
 
 Use S2I builder image to build an application image, cloned from:
 
@@ -20,18 +21,23 @@ docker run -ti -p 8080:8080 --rm --name tmp --entrypoint /bin/bash static-web-si
 ```
 if your S2I app executes without errors, then commit your repositories to GitHub and
 
---------- Build in OpenShift -------------
+##Build in OpenShift
 
 login as admin
 ```
 oc login -u system:admin
 oc project openshift
 ```
-build template and edit image stream
+  build template and edit image stream
 ```
 oc new-build --name alpine-lighttpd-php-s2i --strategy=docker --code https://github.com/mcn015/alpine-lighttpd-php-s2i
 ```
+  correct errors and build from the local directory ->
+```
+oc start-build alpine-lighttpd-php-s2i --from-dir=.
+```
 
+  to add the S2I image builder to thw web console catalogue:
 ```
 oc create -f https://raw.githubusercontent.com/mcn015/alpine-lighttpd-php-s2i/master/imagestream.json
 ```
@@ -39,7 +45,7 @@ oc create -f https://raw.githubusercontent.com/mcn015/alpine-lighttpd-php-s2i/ma
 ```
 oc edit is/alpine-lighttpd-php-s2i -o json
 ```
-and merge the tags element in spec:
+and merge the \utags element in \uspec:
 ```
 {
   "kind": "ImageStream",
@@ -63,7 +69,7 @@ and merge the tags element in spec:
   }
 }
 ```
- Create new application.
+ ##Create new application.
  Login as your user in your project.
 
 ```
