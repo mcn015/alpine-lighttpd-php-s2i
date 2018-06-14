@@ -39,6 +39,30 @@ oc create -f https://raw.githubusercontent.com/mcn015/alpine-lighttpd-php-s2i/ma
 ```
 oc edit is/alpine-lighttpd-php-s2i -o json
 ```
+and merge the tags element in spec:
+```
+{
+  "kind": "ImageStream",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "alpine-lighttpd-php-s2i"
+  },
+  "spec": {
+    "tags": [
+      {
+        "name": "latest",
+        "annotations": {
+          "tags": "builder"
+        },
+        "from": {
+          "kind": "DockerImage",
+          "name": "mcn015/alpine-lighttpd-php-s2i:latest"
+        }
+      }
+    ]
+  }
+}
+```
  Create new application.
  Login as your user in your project.
 
