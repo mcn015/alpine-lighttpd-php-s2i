@@ -49,6 +49,7 @@ RUN  adduser -s /bin/sh -u 1001 -G root -H -S -D default \
   && chmod -R 755 ${EXEC} \
   && chown -R 1001:0 ${WWW} \
   && chmod -R 755 ${WWW} \
+  && chown -R 1001:0 /usr/libexec/s2i \
   && chmod -R 775 /usr/libexec/s2i
 
 USER 1001
